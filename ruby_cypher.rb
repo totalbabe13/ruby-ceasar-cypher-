@@ -1,9 +1,20 @@
 def caesar_cipher(phrase,num)
+  puts '- - - - - - - '
+  puts '- - Original Phrase - -'
+  print phrase
+  original_phrase_array = phrase.split('')
+  print original_phrase_array
+  puts ''
+  puts ''
+  puts '- - - - - - - '
+
+
+  downcased_phrase = phrase.downcase
   alphabet = ("a".."z").to_a
   numbers = (1..26).to_a
   
   #convert phrase to array
-  phrase_array = phrase.split('')
+  phrase_array = downcased_phrase.split('')
   puts '- - Phrase Array - -'
   print phrase_array
   puts ''
@@ -27,17 +38,14 @@ def caesar_cipher(phrase,num)
   puts ''
   puts '- - - - - - - '
 
-  #use numbers with cypher to find new letter index
-  
+  #use numbers with cypher to find new letter index 
   find_new_letter_index = []
-  
   number_code.map do |item| 
     if item.is_a?(Integer)
       find_new_letter_index << item + num
     else
       find_new_letter_index << item   
     end  
-
   end
   
   puts ' '
@@ -48,10 +56,9 @@ def caesar_cipher(phrase,num)
 
   # match new letter index with letters
   secret_message_array = []
-
   find_new_letter_index.each do |item|
      if item.is_a?(Integer)
-       secret_message_array << alphabet[item]
+       secret_message_array << alphabet[item-1]
      else
        secret_message_array << item
      end     
@@ -62,8 +69,26 @@ def caesar_cipher(phrase,num)
   print secret_message_array
   puts ''
   puts '- - - - - - - '
+  # match uppercase letters
+  uppercased_array = []
+  
+  original_phrase_array.each do |letter|
+    if letter == letter.upcase
+      k = original_phrase_array.index(letter)
+      secret_message_array[k] = secret_message_array[k].upcase
+    else
+      letter  
+    end
+  end
+
+  puts ' '
+  puts ' - - Coded Uppercased Phrase - -'
+  print secret_message_array
+  puts ''
+  puts '- - - - - - - '
+
   puts '- - Coded Message - - ' 
   print "-->  " + secret_message_array.join
 end
 
-caesar_cipher('hello world!', 3)
+caesar_cipher('AbcefG HijklmnoP!', 1)
