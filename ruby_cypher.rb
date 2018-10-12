@@ -3,11 +3,9 @@ def caesar_cipher(phrase,num)
   puts '- - Original Phrase - -'
   print phrase
   original_phrase_array = phrase.split('')
-  print original_phrase_array
   puts ''
   puts ''
   puts '- - - - - - - '
-
 
   downcased_phrase = phrase.downcase
   alphabet = ("a".."z").to_a
@@ -25,7 +23,7 @@ def caesar_cipher(phrase,num)
   x = 0
   while x != phrase_array.length
     if alphabet.index(phrase_array[x])
-      number_code << alphabet.index(phrase_array[x]) + num
+      number_code << (alphabet.index(phrase_array[x])) + 1 
       x += 1
     else
       number_code << phrase_array[x]
@@ -58,6 +56,9 @@ def caesar_cipher(phrase,num)
   secret_message_array = []
   find_new_letter_index.each do |item|
      if item.is_a?(Integer)
+       if item > 26
+         item = item - 26
+       end   
        secret_message_array << alphabet[item-1]
      else
        secret_message_array << item
@@ -91,4 +92,4 @@ def caesar_cipher(phrase,num)
   print "-->  " + secret_message_array.join
 end
 
-caesar_cipher('AbcefG HijklmnoP!', 1)
+caesar_cipher('Abcde Vwxyz!', 2)
